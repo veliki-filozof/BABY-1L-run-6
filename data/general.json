@@ -106,7 +106,7 @@
             ]
         }
     ],
-    "notes": "nGen positioned under the work surface, at an angle to the long edge of the epoxy table. Target plane aligned with the axis of the vessel, axis of the generator perpendicular to the axis of the vessel. Center of target plane at a distance of 5.5 cm under the bottom of the epoxy plate.",
+    "notes": "nGen positioned under the work surface, at an angle to the long edge of the epoxy table. Target plane aligned with the axis of the vessel, axis of the generator perpendicular to the axis of the vessel. Center of target plane at a distance of 5.5 cm under the bottom of the epoxy plate. Briefly raised to 140 kV to raise anode voltage to desired value.",
     "neutron_detection": {
         "foils": {
             "enabled": true,
