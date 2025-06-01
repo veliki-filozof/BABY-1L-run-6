@@ -181,7 +181,7 @@
     },
     "tritium_blank_set": {
         "filename": "SLR_BLANK_SCAN"
-    }
+    },
     "tritium_detection": {
         "IV": {
             "1": {
