@@ -180,7 +180,80 @@
         "run_start": "5/30/2025 11:28"
     },
     "tritium_blank_set": {
-        "filename": "SLR_BLANK_SCAN"
+        "filename": "SLR_BLANK_SCAN",
+        "parameter": "tSIE",
+        "blanks": {
+            "SLR_BL2" : {
+                "water_volume": {
+                    "value": 2,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL4" : {
+                "water_volume": {
+                    "value": 4,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL6" : {
+                "water_volume": {
+                    "value": 6,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL8" : {
+                "water_volume": {
+                    "value": 8,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL9" : {
+                "water_volume": {
+                    "value": 9,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL10" : {
+                "water_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            },
+            "SLR_BL11" : {
+                "water_volume": {
+                    "value": 11,
+                    "unit": "ml"
+                },
+                "scint_volume": {
+                    "value": 10,
+                    "unit": "ml"
+                }
+            }
+        }
     },
     "tritium_detection": {
         "IV": {
@@ -218,10 +291,20 @@
                 "planned_sample_time": "5/31/2025 23:28",
                 "actual_sample_time": "5/31/2025 23:47",
                 "lsc_vials_filenames": {
-                    "1": "1L_IV_6-4_SHORT.csv",
-                    "2": "1L_IV_6-4_SHORT.csv",
-                    "3": "1L_IV_6-4_SHORT.csv",
-                    "4": "1L_IV_6-4_SHORT.csv"
+                    "1": "1L_IV_6-4.csv",
+                    "2": "1L_IV_6-4.csv",
+                    "3": "1L_IV_6-4.csv",
+                    "4": "1L_IV_6-4.csv"
+                }
+            },
+            "5": {
+                "planned_sample_time": "6/1/2025 23:28",
+                "actual_sample_time": "6/1/2025 23:13",
+                "lsc_vials_filenames": {
+                    "1": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "2": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "3": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "4": "1L_IV_6-5_OV_6-2_SHORT.csv"
                 }
             }
         },
@@ -234,6 +317,16 @@
                     "2": "1L_IV_6-1_6-2_6-3_OV_6-1.csv",
                     "3": "1L_IV_6-1_6-2_6-3_OV_6-1.csv",
                     "4": "1L_IV_6-1_6-2_6-3_OV_6-1.csv"
+                }
+            },
+            "2": {
+                "planned_sample_time": "6/1/2025 23:28",
+                "actual_sample_time": "6/1/2025 23:13",
+                "lsc_vials_filenames": {
+                    "1": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "2": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "3": "1L_IV_6-5_OV_6-2_SHORT.csv",
+                    "4": "1L_IV_6-5_OV_6-2_SHORT.csv"
                 }
             }
         }
