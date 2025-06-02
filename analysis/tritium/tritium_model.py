@@ -9,6 +9,8 @@ from libra_toolbox.tritium.lsc_measurements import (
     LIBRASample,
 )
 
+import warnings
+from scipy.interpolate import interp1d
 from datetime import datetime
 
 
@@ -16,7 +18,7 @@ all_file_readers = []
 all_quench = []
 
 
-def create_sample(label: str, filename: str) -> LSCSample:
+def create_sample(label: str, filename: str, background_curve=None) -> LSCSample:
     """
     Create a LSCSample from a LSC file with background substracted.
 
@@ -43,27 +45,61 @@ def create_sample(label: str, filename: str) -> LSCSample:
     # create the sample
     sample = LSCSample.from_file(file_reader, label)
 
-    # try to find the background sample from the file
-    background_labels = ["1L-BL-1", "1L-BL-2", "1L-BL-3", "1L-BL-4"]
-    background_sample = None
+     if background_curve:
+        sample_data = file_reader.get_row(label)
+        tSIE = float(sample_data["tSIE"])
+        background_bq = background_curve(tSIE)
+        substract_scalar_background(sample, background_bq)
+    else:
+        # try to find the background sample from the file
+        background_labels = ["1L-BL-1", "1L-BL-2", "1L-BL-3", "1L-BL-4"]
+        background_sample = None
 
-    for background_label in background_labels:
-        try:
-            background_sample = LSCSample.from_file(file_reader, background_label)
-            break
-        except ValueError:
-            continue
+        for background_label in background_labels:
+            try:
+                background_sample = LSCSample.from_file(file_reader, background_label)
+                break
+            except ValueError:
+                continue
 
-    if background_sample is None:
-        raise ValueError(f"Background sample not found in {filename}")
+        if background_sample is None:
+            raise ValueError(f"Background sample not found in {filename}")
 
-    # substract background
-    sample.substract_background(background_sample)
+        # substract background
+        sample.substract_background(background_sample)
 
     # read quench set
     all_quench.append(file_reader.quench_set)
 
     return sample
+
+
+def substract_scalar_background(sample: LSCSample, background_bq: float) -> None:
+    if sample.background_substracted:
+            raise ValueError("Background already substracted")
+    sample.activity -= background_bq * ureg.Bq
+    if sample.activity.magnitude < 0:
+        warnings.warn(
+            f"Activity of {sample.name} is negative after substracting background. Setting to zero."
+        )
+        sample.activity = 0 * ureg.Bq
+    sample.background_substracted = True
+
+
+def build_background_curve_from_file(reader: LSCFileReader, blank_labels: list[str]):
+    tSIE_values = []
+    Bq_values = []
+
+    for label in blank_labels:
+        sample_data = reader.get_row(label)
+        tSIE = float(sample_data["tSIE"])
+        sample = LSCSample.from_file(reader, label)
+        Bq = sample.activity("total").to("Bq").magnitude
+        tSIE_values.append(tSIE)
+        Bq_values.append(Bq)
+
+    interpolator = interp1d(tSIE_values, Bq_values, bounds_error=False, fill_value="extrapolate")
+    return interpolator
 
 
 lsc_data_folder = "../../data/tritium_detection"
@@ -72,6 +108,18 @@ with open("../../data/general.json", "r") as f:
 
 run_nb = general_data["general_data"]["run_nb"]
 
+if "tritium_blank_set" in general_data:
+    curved_bkgr = True
+    blank_info = general_data["tritium_blank_set"]
+    background_file = f"{lsc_data_folder}/{blank_info['filename']}"
+    background_reader = LSCFileReader(background_file, labels_column="SMPL_ID")
+    background_reader.read_file()
+
+    blank_labels = list(blank_info["blanks"].keys())
+    background_curve = build_background_curve_from_file(background_reader, blank_labels)
+else:
+    curved_bkgr = False
+    background_curve = None
 
 # read start time from general.json
 all_start_times = []
@@ -96,6 +144,7 @@ for stream, samples in general_data["tritium_detection"].items():
             sample = create_sample(
                 label=f"1L-{stream}_{run_nb}-{sample_nb}-{vial_nb}",
                 filename=f"{lsc_data_folder}/{filename}",
+                background_curve=background_curve,
             )
             libra_samples.append(sample)
 
