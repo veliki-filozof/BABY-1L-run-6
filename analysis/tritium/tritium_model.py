@@ -45,8 +45,8 @@ def create_sample(label: str, filename: str, background_curve=None) -> LSCSample
     # create the sample
     sample = LSCSample.from_file(file_reader, label)
 
-     if background_curve:
-        sample_data = file_reader.get_row(label)
+    if background_curve:
+        sample_data = get_row_by_label(file_reader, label)
         tSIE = float(sample_data["tSIE"])
         background_bq = background_curve(tSIE)
         substract_scalar_background(sample, background_bq)
@@ -74,6 +74,17 @@ def create_sample(label: str, filename: str, background_curve=None) -> LSCSample
     return sample
 
 
+def get_row_by_label(reader: LSCFileReader, label: str) -> dict:
+    if reader.data is None:
+        raise ValueError("Data not loaded. Call reader.read_file() first.")
+    if reader.labels_column is None:
+        raise ValueError("labels_column is not set in reader.")
+    row = reader.data[reader.data[reader.labels_column] == label]
+    if row.empty:
+        raise ValueError(f"Label '{label}' not found in data.")
+    return row.iloc[0].to_dict()
+
+
 def substract_scalar_background(sample: LSCSample, background_bq: float) -> None:
     if sample.background_substracted:
             raise ValueError("Background already substracted")
@@ -91,10 +102,10 @@ def build_background_curve_from_file(reader: LSCFileReader, blank_labels: list[s
     Bq_values = []
 
     for label in blank_labels:
-        sample_data = reader.get_row(label)
+        sample_data = get_row_by_label(reader, label)
         tSIE = float(sample_data["tSIE"])
         sample = LSCSample.from_file(reader, label)
-        Bq = sample.activity("total").to("Bq").magnitude
+        Bq = sample.activity.magnitude
         tSIE_values.append(tSIE)
         Bq_values.append(Bq)
 
