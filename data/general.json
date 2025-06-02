@@ -89,7 +89,7 @@
         },
         {
             "name": "nGen-400",
-            "enabled": false,
+            "enabled": true,
             "anode_voltage": {
                 "value": 120,
                 "unit": "kV"
