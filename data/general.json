@@ -180,7 +180,7 @@
         "run_start": "5/30/2025 11:28"
     },
     "tritium_blank_set": {
-        "filename": "SLR_BLANK_SCAN",
+        "filename": "SLR_BLANK_SCAN.csv",
         "parameter": "tSIE",
         "blanks": {
             "SLR_BL2" : {
