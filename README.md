@@ -4,7 +4,7 @@
 
 This is a template repository for experimental runs of LIBRA.
 
-This repository has the data for the run [**insert run name**].
+This repository has the data for the run [BABY 1L Run #6].
 
 ## How to reproduce the results
 
@@ -20,12 +20,12 @@ This repository has the data for the run [**insert run name**].
 conda env create -f environment.yml
 ```
 
-2. Run the notebooks with the created environment `[INSERT NAME OF ENV]`
+2. Run the notebooks with the created environment `[baby-1l-run-6]`
 
 ## Todo list:
 - [ ] [Link to Zenodo](https://zenodo.org/)
-- [ ] Change environment name in [`environment.yml`](environment.yml)
-- [ ] Change environment name in [CI workflows](.github/workflows)
+- [x] Change environment name in [`environment.yml`](environment.yml)
+- [x] Change environment name in [CI workflows](.github/workflows)
 - [ ] Modify [binder](https://mybinder.org/) badge by inserting the repo name
 - [ ] Add general run data to [`data/general.json`](data/general.json)
 - [ ] Add LSC data to [`data/tritium_detection`](data/tritium_detection)
