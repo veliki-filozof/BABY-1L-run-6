@@ -229,7 +229,6 @@ for generator in general_data["generators"]:
 # Neutron rate
 
 
-# TODO from Collin's foil analysis, replace with more robust method
 neutron_rate = 1.3e09 * ureg.neutron * ureg.s**-1 # based on manufacturer test data for generator settings
 neutron_rate_uncertainty = 4.9e06 * ureg.neutron * ureg.s**-1
 neutron_rate_relative_uncertainty = (neutron_rate_uncertainty / neutron_rate).to(
