@@ -64,30 +64,6 @@
     },
     "generators": [
         {
-            "name": "A-325",
-            "enabled": false,
-            "acceleration_voltage": {
-                "value": "N/A",
-                "unit": "N/A"
-            },
-            "source_voltage": {
-                "value": "N/A",
-                "unit": "N/A"
-            }
-        },
-        {
-            "name": "P-383",
-            "enabled": false,
-            "beam_current": {
-                "value": "N/A",
-                "unit": "N/A"
-            },
-            "beam_voltage": {
-                "value": "N/A",
-                "unit": "N/A"
-            }
-        },
-        {
             "name": "nGen-400",
             "enabled": true,
             "anode_voltage": {
