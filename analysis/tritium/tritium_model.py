@@ -270,8 +270,8 @@ measured_TBR = (T_produced_IV / quantity_to_activity(T_consumed)).to(
 )
 
 # Run 1 transport coeff and measured TBR for overlay
-optimised_ratio = 0
-k_top = 2.5 * 12 * 1.45 * 8.9e-8 * ureg.m * ureg.s**-1
+optimised_ratio = 0.125
+k_top = 0.0575 * 2.5 * 12 * 1.45 * 8.9e-8 * ureg.m * ureg.s**-1
 k_wall = optimised_ratio * k_top
 
 baby_model = Model(
