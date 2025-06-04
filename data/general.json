@@ -34,8 +34,8 @@
             "unit": "SCCM"
         },
         "switched_to": {
-            "type": null,
-            "gas_switch_time": null
+            "type": "He",
+            "gas_switch_time": "06/02/2025 16:50"
         }
     },
     "secondary_gas": {
@@ -58,8 +58,8 @@
             "unit": "SCCM"
         },
         "switched_to": {
-            "type": null,
-            "gas_switch_time": null
+            "type": "He",
+            "gas_switch_time": "06/02/2025 16:50"
         }
     },
     "generators": [
